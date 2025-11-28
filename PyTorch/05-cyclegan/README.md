@@ -110,12 +110,20 @@ Discriminator(
 ├── utils.py                     # ユーティリティ関数
 ├── train.py                     # 訓練スクリプト
 ├── test.py                      # テスト・推論スクリプト
+├── visualize_results.py         # 可視化スクリプト
 ├── models/                      # 訓練済みモデル保存
 │   ├── netG_A2B.pth
 │   ├── netG_B2A.pth
 │   ├── netD_A.pth
 │   └── netD_B.pth
-└── logs/                        # TensorBoardログ
+├── logs/                        # TensorBoardログ
+├── outputs/                     # 変換結果画像
+│   ├── A/                       # A→B変換結果
+│   └── B/                       # B→A変換結果
+└── results/                     # 可視化結果
+    ├── transformation_A2B.png   # A→B変換サンプル
+    ├── transformation_B2A.png   # B→A変換サンプル
+    └── comparison.png           # 変換結果の比較
 ```
 
 ## 🚀 実行方法
@@ -196,6 +204,17 @@ python test.py
 
 訓練済みモデルを使用して、新しい画像のスタイル変換を実行します。
 
+### 6. 変換結果の可視化
+
+```bash
+python visualize_results.py
+```
+
+以下の画像が `results/` ディレクトリに生成されます：
+- A→B変換結果のサンプル
+- B→A変換結果のサンプル
+- 変換結果の比較
+
 ## ⚙️ 損失関数の詳細
 
 CycleGANは3種類の損失関数を組み合わせています：
@@ -237,6 +256,43 @@ loss_G = loss_identity_A + loss_identity_B +
          loss_GAN_A2B + loss_GAN_B2A +
          loss_cycle_ABA + loss_cycle_BAB
 ```
+
+## 📊 画像変換結果の可視化
+
+### ドメインA → ドメインB 変換
+
+訓練済みモデルによる画像変換結果のサンプルです。
+
+![A→B変換](results/transformation_A2B.png)
+
+**例: リンゴ → オレンジ変換**
+- 元画像のリンゴがオレンジの特徴（色、テクスチャ）を獲得
+- 形状や構図は保持されたまま、スタイルのみ変換
+
+### ドメインB → ドメインA 変換
+
+![B→A変換](results/transformation_B2A.png)
+
+**例: オレンジ → リンゴ変換**
+- 元画像のオレンジがリンゴの特徴に変換
+- 双方向の変換が可能であることを示す
+
+### 変換結果の比較
+
+![変換比較](results/comparison.png)
+
+**CycleGANの特徴:**
+- ✅ ペア画像データ不要で学習可能
+- ✅ 双方向変換（A→BとB→A）
+- ✅ Cycle Consistencyにより一貫性を保証
+- ✅ 高品質なスタイル変換を実現
+
+**応用可能なタスク:**
+- 🎨 写真 ↔ 絵画のスタイル変換
+- 🌞 夏 ↔ 冬の季節変換
+- 🐴 馬 ↔ シマウマのドメイン変換
+- 🏥 医療画像のモダリティ変換（MRI ↔ CT）
+- 🌃 昼 ↔ 夜の時間帯変換
 
 ## 📈 期待される結果
 

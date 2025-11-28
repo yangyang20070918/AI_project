@@ -89,6 +89,7 @@ ResNet(
 ├── requirements.txt             # 依存ライブラリ
 ├── train.py                     # 訓練スクリプト（メイン）
 ├── test.py                      # テストスクリプト
+├── visualize_results.py         # 可視化スクリプト
 ├── load_cifar10.py              # データローダー
 ├── readcifar10.py               # データ読み込みユーティリティ
 ├── vggnet.py                    # VGGNetモデル定義
@@ -97,7 +98,11 @@ ResNet(
 ├── inceptionMolule.py           # Inceptionモデル定義
 ├── pre_resnet.py                # 事前訓練済みResNet18
 ├── models/                      # 訓練済みモデル保存ディレクトリ
-└── logs/                        # TensorBoardログディレクトリ
+├── logs/                        # TensorBoardログディレクトリ
+└── results/                     # 可視化結果
+    ├── training_curves.png      # 訓練曲線
+    ├── predictions.png          # 予測結果
+    └── class_accuracy.png       # クラス別精度
 ```
 
 ## 🚀 実行方法
@@ -136,7 +141,18 @@ tensorboard --logdir=logs
 - 学習率の変化
 - 訓練画像とテスト画像のサンプル
 
-### 4. テストの実行
+### 4. 訓練結果の可視化
+
+```bash
+python visualize_results.py
+```
+
+以下の画像が `results/` ディレクトリに生成されます：
+- 訓練・テスト損失/精度の推移グラフ
+- 予測結果のサンプル（20枚）
+- クラス別精度の分析
+
+### 5. テストの実行
 
 ```bash
 python test.py
@@ -186,6 +202,44 @@ epoch is 200, loss is: 0.234, test correct is: 85.7%
 | ResNet18（事前訓練） | 〜11M | **90-93%** | 速 |
 
 ※ 実際の精度は訓練条件により変動します
+
+## 📊 訓練結果の可視化
+
+### 訓練曲線
+
+TensorBoardログから抽出した訓練・テスト損失と精度の推移グラフです。
+
+![訓練曲線](results/training_curves.png)
+
+**グラフの見方:**
+- 損失が減少し、精度が向上していることが確認できます
+- 複数モデルを訓練した場合、性能比較が可能です
+
+### 予測結果のサンプル
+
+訓練済みモデルによる予測結果を視覚的に確認できます。
+
+![予測結果](results/predictions.png)
+
+- ✅ 緑色: 正しく分類された例
+- ❌ 赤色: 誤分類された例
+- 各画像に予測クラスと正解クラスを表示
+
+### クラス別精度
+
+10クラスそれぞれの分類精度を分析します。
+
+![クラス別精度](results/class_accuracy.png)
+
+**分析ポイント:**
+- 緑のバー: 最も精度が高いクラス
+- 赤のバー: 最も精度が低いクラス
+- クラス間の性能差を確認し、改善点を見つけられます
+
+一般的な傾向:
+- 🟢 高精度: ship（船）、truck（トラック）、airplane（飛行機）
+- 🔴 低精度: cat（猫）、dog（犬）、bird（鳥）など動物系
+  - 理由: 動物はポーズや向きが多様で、類似した特徴を持つため
 
 ## 💡 学習したポイント
 

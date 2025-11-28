@@ -73,11 +73,18 @@ CNN(
 ├── README.md                           # プロジェクト説明（本ファイル）
 ├── requirements.txt                    # 依存ライブラリ
 ├── CNN.py                              # CNNモデル定義
-├── demo_cls.py                         # 訓練スクリプト
+├── demo_cls.py                         # 訓練スクリプト（オリジナル）
+├── demo_cls_with_logging.py            # 訓練スクリプト（履歴記録版）
 ├── demo_cls_inference.py               # 推論スクリプト
+├── visualize_results.py                # 可視化スクリプト
 ├── mnisst/                             # MNISTデータセット（自動ダウンロード）
-└── model/
-    └── mnist_model.pkl                 # 保存された訓練済みモデル
+├── model/
+│   └── mnist_model.pkl                 # 保存された訓練済みモデル
+└── results/                            # 訓練結果（可視化）
+    ├── training_history.json           # 訓練履歴データ
+    ├── training_curves.png             # 損失・精度グラフ
+    ├── predictions.png                 # 予測結果
+    └── confusion_matrix.png            # 混同行列
 ```
 
 ## 🚀 実行方法
@@ -91,13 +98,30 @@ pip install -r requirements.txt
 
 ### 2. モデルの訓練
 
+**通常の訓練:**
 ```bash
 python demo_cls.py
 ```
 
+**訓練履歴を記録する場合（推奨）:**
+```bash
+python demo_cls_with_logging.py
+```
+
 初回実行時はMNISTデータセットが自動的にダウンロードされます。
 
-### 3. 推論の実行
+### 3. 訓練結果の可視化
+
+```bash
+python visualize_results.py
+```
+
+以下の画像が `results/` ディレクトリに生成されます：
+- 損失・精度の推移グラフ
+- 予測結果のサンプル
+- 混同行列
+
+### 4. 推論の実行
 
 ```bash
 python demo_cls_inference.py
@@ -119,6 +143,40 @@ epoch is 10, accuracy is 0.99, loss_test is 0.0321
 ### 期待される性能
 - **最終精度**: 約98-99%
 - **訓練時間**: CPU: 約10-15分 / GPU: 約2-3分（エポック数10の場合）
+
+## 📊 訓練結果の可視化
+
+### 損失と精度の推移
+
+訓練の進行に伴い、損失が減少し精度が向上していることが確認できます。
+
+![訓練曲線](results/training_curves.png)
+
+**グラフの見方:**
+- **左**: 訓練損失（青）とテスト損失（赤）の推移
+  - 両方とも減少 → 良好な学習
+  - テスト損失が上昇 → 過学習の兆候
+- **右**: テスト精度の推移
+  - 最終的に約98-99%に到達
+
+### 予測結果のサンプル
+
+モデルの予測結果を視覚的に確認できます。
+
+![予測結果](results/predictions.png)
+
+- ✅ 緑色: 正しく分類された例
+- ❌ 赤色: 誤分類された例
+
+### 混同行列（Confusion Matrix）
+
+各数字の分類精度を詳細に分析できます。
+
+![混同行列](results/confusion_matrix.png)
+
+**混同行列の見方:**
+- 対角線上の値が大きい → 高精度
+- 対角線外の値 → 誤分類（どの数字をどの数字と間違えたか）
 
 ## 💡 学習したポイント
 
