@@ -1,0 +1,2 @@
+C:\Users\youyo\Desktop\AI_data\cifar-10-python\cifar-10-batches-py
+

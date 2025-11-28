@@ -1,0 +1,5 @@
+# Boston Housing Price Prediction - 依存ライブラリ
+# Python 3.7以上を推奨
+
+torch>=1.10.0
+numpy>=1.21.0
