@@ -1,0 +1,18 @@
+
+Boston Housing 価格予測 - 実験結果
+
+実験ID: 20251130_114704
+モデル: SimpleNN
+パラメータ数: 1,501
+
+訓練設定:
+- Epochs: 1000
+- Batch Size: 32
+- Learning Rate: 0.001
+- Optimizer: Adam
+
+結果:
+- Best Epoch: 255
+- Best Val Loss: 0.005406
+- Final Train Loss: 0.013501
+- Final Val Loss: 0.005704

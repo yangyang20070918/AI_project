@@ -1,0 +1,167 @@
+# Boston Housing 価格予測 - デフォルト設定
+
+# プロジェクト設定
+project:
+  name: "boston_housing"
+  version: "2.0.0"
+  description: "Boston住宅価格予測プロジェクト"
+
+# データ設定
+data:
+  raw_data_path: "data/raw/housing.data"
+  processed_data_path: "data/processed/preprocessed.npz"
+
+  # データ分割比率
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+  # 前処理設定
+  preprocessing:
+    scaler_type: "standard"  # "standard" or "minmax"
+    handle_outliers: false
+    outlier_threshold: 3.0  # 標準偏差の何倍を外れ値とするか
+
+# モデル設定
+model:
+  # モデルタイプ: "baseline", "simple_nn", "deep_nn", "residual_nn"
+  type: "simple_nn"
+
+  # 入力・出力次元
+  input_dim: 13
+  output_dim: 1
+
+  # Simple NN の設定
+  simple_nn:
+    hidden_size: 100
+    dropout_rate: 0.2
+    use_batch_norm: false
+
+  # Deep NN の設定
+  deep_nn:
+    hidden_sizes: [128, 64, 32]
+    dropout_rate: 0.3
+    use_batch_norm: true
+    activation: "relu"  # "relu", "leaky_relu", "elu"
+
+  # Residual NN の設定
+  residual_nn:
+    hidden_sizes: [128, 128, 64]
+    dropout_rate: 0.2
+    use_batch_norm: true
+
+# 訓練設定
+training:
+  # 基本パラメータ
+  batch_size: 32
+  epochs: 1000
+  learning_rate: 0.001
+
+  # オプティマイザ
+  optimizer:
+    type: "adam"  # "adam", "sgd", "adamw"
+    weight_decay: 0.0001
+
+    # SGD固有のパラメータ
+    sgd:
+      momentum: 0.9
+      nesterov: true
+
+  # 損失関数
+  loss:
+    type: "mse"  # "mse", "mae", "huber"
+    loss_scale: 0.001  # 損失値のスケーリング係数
+
+  # 学習率スケジューリング
+  lr_scheduler:
+    enabled: true
+    type: "reduce_on_plateau"  # "reduce_on_plateau", "step", "cosine"
+
+    # ReduceLROnPlateau の設定
+    reduce_on_plateau:
+      mode: "min"
+      factor: 0.5
+      patience: 20
+      min_lr: 0.00001
+
+    # StepLR の設定
+    step:
+      step_size: 100
+      gamma: 0.5
+
+  # Early Stopping
+  early_stopping:
+    enabled: true
+    patience: 50
+    min_delta: 0.0001  # 改善とみなす最小の変化量
+    monitor: "val_loss"  # 監視する指標
+
+  # チェックポイント
+  checkpoint:
+    save_best_only: true
+    save_last: true
+    monitor: "val_loss"
+    mode: "min"
+
+# 評価設定
+evaluation:
+  metrics:
+    - "mse"
+    - "rmse"
+    - "mae"
+    - "r2"
+    - "mape"
+
+  # 評価時のバッチサイズ
+  batch_size: 64
+
+# 可視化設定
+visualization:
+  # 図のスタイル
+  style: "seaborn"  # "seaborn", "ggplot", "default"
+  figure_size: [10, 6]
+  dpi: 100
+
+  # 保存形式
+  save_formats: ["png", "pdf"]
+
+  # 学習曲線
+  learning_curves:
+    show_train: true
+    show_val: true
+    smoothing: 0.0  # 0-1の範囲でスムージング
+
+  # 予測プロット
+  prediction_plots:
+    show_confidence_interval: true
+    confidence_level: 0.95
+
+# 実験管理設定
+experiment:
+  base_dir: "experiments"
+
+  # 実験ID生成
+  id_format: "%Y%m%d_%H%M%S"  # strftime形式
+
+  # 保存するファイル
+  save_config: true
+  save_training_history: true
+  save_plots: true
+  save_report: true
+
+# システム設定
+system:
+  # 乱数シード
+  seed: 42
+
+  # デバイス設定
+  device: "auto"  # "auto", "cpu", "cuda", "cuda:0"
+
+  # 並列処理
+  num_workers: 0  # DataLoaderのワーカー数
+
+  # ロギング
+  logging:
+    level: "INFO"  # "DEBUG", "INFO", "WARNING", "ERROR"
+    console_output: true
+    file_output: true

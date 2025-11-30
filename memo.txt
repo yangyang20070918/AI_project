@@ -1,0 +1,114 @@
+------------------------------------------------------------------
+楊様
+レバテックフリーランスです。
+【案件情報】
+データマイニング領域の単価相場は800000円、条件を満たした場合の最高単価は1850000円で、
+現在も募集が進んでいます。
+具体的な案件を見てみたいときは、
+▼以下より経験と希望をご回答ください。
+https://ux0.jp/SExlql
+------------------------------------------------------------------
+上面这是用人单位给我发的信，关于找工作的。
+我刚刚开始从事フリーランス的工作，想做机械学习，深度学习方面的工作，但是我没有这方面的工作经验。可是自己已经自学了一些，我把我学习后写的几段代码给你看看，帮我想想应该怎么做。
+一共有五个例子。
+(1)房价回归预测
+C:\Users\youyo\projects\AI_study\PyTorch\01-BostonHousing
+(2)MNIST手写数字识别
+C:\Users\youyo\projects\AI_study\PyTorch\02-NumberCLS
+(3)CIFAR-10图像分类项目
+C:\Users\youyo\projects\AI_study\PyTorch\03-Cifar10
+(4)COCO数据集处理项目
+C:\Users\youyo\projects\AI_study\PyTorch\04-coco
+关于coco这个，应为数据太大，没有实际训练模型。只是做了数据的下载。
+(5)CycleGAN（风格迁移）项目
+C:\Users\youyo\projects\AI_study\PyTorch\05-cyclegan
+------------------------------------------------------------------
+ ✅ 可視化スクリプト作成が完了しました！
+
+  おめでとうございます！すべての作業が完了し、GitHubにプッシュされました。
+
+  📊 完成した内容
+
+  1. MNIST手書き数字認識 PyTorch/02-NumberCLS/
+
+  - ✅ demo_cls_with_logging.py - 訓練履歴をJSON形式で保存
+  - ✅ visualize_results.py - 損失/精度グラフ、予測結果、混同行列を可視化
+  - ✅ README更新 - 可視化セクションと実行手順を追加
+  - ✅ requirements.txt更新 - matplotlib、seaborn、scikit-learn追加
+
+  2. CIFAR-10画像分類 PyTorch/03-Cifar10/
+
+  - ✅ visualize_results.py - TensorBoardログ読み取り、訓練曲線、予測結果、クラス別精度を可視化
+  - ✅ README更新 - 可視化セクションと実行手順を追加
+  - ✅ requirements.txt更新 - tensorboard、seaborn追加
+
+  3. CycleGAN画像スタイル変換 PyTorch/05-cyclegan/
+
+  - ✅ visualize_results.py - A→B/B→A変換結果の比較表示
+  - ✅ README更新 - 可視化セクションと実行手順を追加
+
+  4. ドキュメント
+
+  - ✅ 0001_可視化スクリプト作成計画.md - 作業計画と進捗を文書化
+  - ✅ 記録_準備流れ.txt - 既存の準備フロー文書
+
+  🎯 次にやること
+
+  各プロジェクトで以下のコマンドを実行して、可視化結果を生成してください：
+
+  MNIST:
+
+  cd PyTorch/02-NumberCLS
+  python demo_cls_with_logging.py  # 訓練実行（履歴を記録）
+  python visualize_results.py       # 可視化生成
+
+  CIFAR-10:
+
+  cd PyTorch/03-Cifar10
+  python visualize_results.py       # 既存のログとモデルから可視化
+
+  CycleGAN:
+
+  cd PyTorch/05-cyclegan
+  python visualize_results.py       # 既存の変換結果から可視化
+
+  📈 期待される効果
+
+  これらの可視化により、ポートフォリオの 説得力が大幅に向上 します：
+
+  - ✅ 視覚的: グラフや画像で一目瞭然
+  - ✅ 信頼性: 実際に訓練・評価した証拠
+  - ✅ プロフェッショナル: 実験結果の体系的な管理
+  - ✅ 採用担当者への訴求力UP: 技術力が明確に伝わる
+
+  GitHubリポジトリ: https://github.com/yangyang20070918/AI_project
+
+  作業お疲れ様でした！🎉
+------------------------------------------------------------------
+【01-BostonHousing】の訓練、評価、可視化
+  📝 使用方法の例
+  詳細は README.md を参照してください。
+  # デフォルト設定で訓練
+  python scripts/train.py
+  # 実験結果の評価
+  python scripts/evaluate.py <実験ID>
+　python scripts/evaluate.py 20251130_114704
+  # HTMLレポートをブラウザで開く
+  start experiments/<実験ID>/report.html
+　start experiments/20251130_114704/report.html
+
+------------------------------------------------------------------
+
+
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
